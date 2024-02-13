@@ -11,14 +11,15 @@
 [![Read the Docs](https://readthedocs.org/projects/ringba-api-client/badge/)](https://ringba-api-client.readthedocs.io/)
 [![PyPI - License](https://img.shields.io/pypi/l/ringba-api-client.svg)](https://pypi.python.org/pypi/ringba-api-client)
 
-[![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+<!-- [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) -->
+
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 
 </div>
 
 
-Simple Rrequest package to integrate with the Ringba Public API
+Simple *unofficial* request wrapper to integrate with the Ringba Public API.
 
 
 * GitHub repo: <https://github.com/nat5142/ringba-api-client.git>
@@ -43,13 +44,46 @@ from ringba_api_client import RingbaApiClient
 Initialize:
 
 ```python
-ringba = RingbaApiClient(api_key='XXXXXXXXXXXXXXXX')
+# provide an API key and account ID
+ringba = RingbaApiClient(api_key='XXXXXXXXXXXXXXXX', account_id='XXXXXXXXXXXXXXXX')
+
+# change the account ID
+ringba.account_id = 'XXXXXXXXXXXXXXXX'
 ```
 
 Use:
 
 ```python
 target = ringba.get_targets(target_id='abdc12345')
+```
+
+
+## Environment variables:
+
+- `RINGBA_API_KEY`
+- `RINGBA_ACCOUNT_ID`
+
+Both of these are looked up if not provided on object initialization. If API Key is not provided, object initialization fails.
+
+
+## Extending
+
+Is the library missing a function that you need and you don't want to update the package? Just extend the class:
+
+```python
+# utilities/ringba.py
+from ringba_api_client import RingbaApiClient as _RingbaApiClient
+
+class RingbaApiClient(_RingbaApiClient):
+
+    def some_new_method(self, *args, **kwargs):
+        # do stuff
+```
+
+And then import in your project like so:
+
+```python
+from utilities.ringba import RingbaApiClient
 ```
 
 
