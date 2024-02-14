@@ -60,7 +60,7 @@ target = ringba.get_targets(target_id='abdc12345')
 
 ## Environment variables:
 
-- `RINGBA_API_KEY`
+- `RINGBA_API_TOKEN`
 - `RINGBA_ACCOUNT_ID`
 
 Both of these are looked up if not provided on object initialization. If API Key is not provided, object initialization fails.
